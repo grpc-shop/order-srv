@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "./order";
+
+service Order {
+  rpc CreateOrder (CreateOrderReq)returns (CreateOrderReply){}
+}
+
+
+enum Code {
+  NOKnow = 0;
+  Success = 200;
+
+}
+
+
+message CreateOrderReq {
+}
+
+
+message CreateOrderReply {
+  Code code = 1;
+  string msg = 2;
+  message product{
+    int64 id = 1;
+  }
+  product data = 3;
+}
