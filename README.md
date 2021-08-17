@@ -1,2 +1,2 @@
 # order-srv
-order
+order-srv
