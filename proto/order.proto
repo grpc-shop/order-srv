@@ -15,10 +15,25 @@ enum Code {
 
 
 message CreateOrderReq {
+
 }
 
 
 message CreateOrderReply {
+  Code code = 1;
+  string msg = 2;
+  message product{
+    int64 id = 1;
+  }
+  product data = 3;
+}
+
+message PaidOrderReq {
+
+}
+
+
+message PaidOrderReply {
   Code code = 1;
   string msg = 2;
   message product{

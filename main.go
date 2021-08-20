@@ -22,7 +22,7 @@ func main() {
 	// 开始迁移转换
 	err := t2t.
 		// 指定某个表,如果不指定,则默认全部表都迁移
-		Table("product_skus").
+		Table("order_items").
 		//// 表前缀
 		//Prefix("prefix_").
 		// 是否添加json tag
@@ -34,7 +34,7 @@ func main() {
 		// 是否添加结构体方法获取表名
 		RealNameMethod("TableName").
 		// 生成的结构体保存路径
-		SavePath("model/product_sku.go").
+		SavePath("model/order_item.go").
 		// 数据库dsn,这里可以使用 t2t.DB() 代替,参数为 *sql.DB 对象
 		Dsn("root:Passw0rd@tcp(localhost:3306)/grpc-shop?charset=utf8").
 		// 执行
