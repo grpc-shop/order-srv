@@ -4,40 +4,87 @@ option go_package = "./order";
 
 service Order {
   rpc CreateOrder (CreateOrderReq)returns (CreateOrderReply){}
+  rpc OrderPaid (OrderPaidReq)returns (OrderPaidReply){}
 }
 
 
 enum Code {
   NOKnow = 0;
   Success = 200;
-
+  CreateErr = 20001;
+  OrderPaidErr = 20002;
 }
 
 
-message CreateOrderReq {
+message OrderInfo {
+  int64 id = 1;
+  string order_id = 2;
+  string user_name = 3;
+  string user_phone = 4;
+  string user_address = 5;
+  string total_amount = 6;
+  int64 paid_at = 7;
+  string payment_no = 8;
+  int32 refund_status = 9;
+  int32 refund_no = 10;
+  int32 order_status = 11;
+  string extra = 12;
+  string remark = 13;
+}
 
+message OrderItemInfo {
+  int64 id = 1;
+  string order_id = 2;
+  int64 product_id = 3;
+  int64 product_sku_id = 4;
+  int64 amount = 5;
+  int64 price = 6;
+  string title = 7;
+  string image = 8;
+}
+
+
+
+message CreateOrderReq {
+  string user_name = 1;
+  string user_phone = 2;
+  string user_address = 3;
+  string extra = 4;
+  string remark = 5;
+  message item {
+    int64 product_id = 3;
+    int64 product_sku_id = 4;
+    int64 amount = 5;
+    int64 price = 6;
+    string title = 7;
+    string image = 8;
+  }
+  repeated item items = 6;
 }
 
 
 message CreateOrderReply {
   Code code = 1;
   string msg = 2;
-  message product{
+  message order{
     int64 id = 1;
   }
-  product data = 3;
+  order data = 3;
 }
 
-message PaidOrderReq {
-
+message OrderPaidReq {
+  string order_id = 1;
+  string  payment_no = 2;
+  int64 paid_at = 3;
+  int64 paid_amount = 4;
 }
 
 
-message PaidOrderReply {
+message OrderPaidReply {
   Code code = 1;
   string msg = 2;
-  message product{
+  message order{
     int64 id = 1;
   }
-  product data = 3;
+  order data = 3;
 }
