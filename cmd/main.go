@@ -21,7 +21,6 @@ func main() {
 	dbFile := conf.InitFileConf("../conf/db.json")
 	dbConf, err := dbFile.GetDbConf()
 	if err != nil {
-		fmt.Println("xxx")
 		log.Fatal(err)
 	}
 	db, err := conf.GetDb(dbConf)
@@ -51,7 +50,7 @@ func main() {
 	}
 	creds := credentials.NewTLS(&tls.Config{
 		Certificates: []tls.Certificate{certificate},
-		ClientAuth:   tls.RequireAndVerifyClientCert, // NOTE: this is optional!
+		ClientAuth:   tls.RequireAndVerifyClientCert,
 		ClientCAs:    certPool,
 	})
 	var opts []grpc.ServerOption
